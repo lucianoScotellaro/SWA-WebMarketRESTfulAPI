@@ -1,0 +1,26 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "https://swa.net/schemas/product",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "producer": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "price": {
+        "type": "number",
+        "minimum": 0
+      },
+      "url": {
+        "type": "string"
+      }
+    },
+    "required": ["name","producer","id","price","url"],
+    "additionalProperties": false
+  }

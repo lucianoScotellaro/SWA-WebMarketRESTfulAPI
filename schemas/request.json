@@ -1,0 +1,52 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "https://swa.net/schemas/request",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "orderer": {
+        "$ref": "/schemas/user"
+      },
+      "technician": {
+        "$ref": "/schemas/user"
+      },
+      "category": {
+        "type": "string"
+      },
+      "characteristics": {
+        "type": "object"
+      },
+      "notes": {
+        "type": "string"
+      },
+      "proposal": {
+        "$ref": "/schemas/proposal"
+      },
+      "ongoing": {
+        "type": "boolean"
+      },
+      "outcome": {
+        "type": "string",
+        "enum": [
+          "accepted",
+          "rejected as non compliant",
+          "rejected as defective"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "orderer",
+      "technician",
+      "category",
+      "characteristics",
+      "notes",
+      "proposal",
+      "ongoing",
+      "outcome"
+    ],
+    "additionalProperties": false
+  }
