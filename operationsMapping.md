@@ -7,34 +7,19 @@
 
 ### 1. Login
 
-`GET [BASE]/users/login`
+`POST [BASE]/users/login`
 
-#### Input
-
-```json
-  [
-	{ 
-		"username" : "pincopallino", 
-		"password" : "abciaebuabcoa2183b18481rbq"
-	},
-    ....    
-  ]
-```
-
-#### Output
-
-(200): 
-
-```json
-    { 
-		"authenticated" : "true", 
-		"url" : " [BASE]/users/{id}"
-    }  
-```
+### Chiedere al prof materiale
 
 -------------------------------------------------
 
-### 2. Inserimento richiesta d'acquisto
+### 2. Logout
+
+`POST [BASE]/users/logout`
+
+### Chiedere al prof materiale
+
+### 3. Inserimento richiesta d'acquisto
 
 `POST [BASE]/requests`
 
@@ -48,7 +33,7 @@
 
 -------------------------------------------------
 
-### 3. Associazione richiesta &rarr tecnico
+### 4. Associazione richiesta &rarr tecnico
 
 `PATCH [BASE]/requests/{id}/technicianEmail`
 
@@ -62,7 +47,7 @@
 
 --------------------------------------------------
 
-### 4. Inserimento proposta d'acquisto
+### 5. Inserimento proposta d'acquisto
 
 `POST [BASE]/proposals`
 
@@ -76,7 +61,7 @@
 
 --------------------------------------------------
 
-### 5. Aggiornamento proposta d'acquisto
+### 6. Aggiornamento proposta d'acquisto
 
 `PATCH [BASE]/proposals/{id}`
 
@@ -90,7 +75,7 @@
 
 --------------------------------------------------
 
-### 6. Approvazione proposta d'acquisto
+### 7. Approvazione proposta d'acquisto
 
 `PATCH [BASE]/proposals/{id}/response`
 
@@ -104,7 +89,7 @@
 
 --------------------------------------------------
 
-### 7. Eliminazione richiesta d'acquisto
+### 8. Eliminazione richiesta d'acquisto
 
 `DELETE [BASE]/requests/{id}`
 
@@ -114,7 +99,7 @@
 
 --------------------------------------------------
 
-### 8. Estrazione lista richieste in corso di un certo ordinante
+### 9. Estrazione lista richieste in corso di un certo ordinante
 
 `GET [BASE]/requests/current?ordererID=123123`
 
@@ -134,7 +119,7 @@
 
 --------------------------------------------------
 
-### 9. Estrazione lista richieste non assegnate
+### 10. Estrazione lista richieste non assegnate
 
 `GET [BASE]/requests/unassigned`
 
@@ -154,7 +139,7 @@
 
 --------------------------------------------------
 
-### 10. Estrazione dettagli proposta
+### 11. Estrazione dettagli proposta
 
 `GET [BASE]/proposals/{id}`
 
@@ -164,9 +149,9 @@
 
 --------------------------------------------------
 
-### 11. Estrazione richieste gestite da un certo tecnico
+### 12. Estrazione richieste gestite da un certo tecnico
 
-`GET [BASE]/requests?technicianEmail=unamailacaso@gmail.com`
+`GET [BASE]/requests/{email}`
 
 #### Output
 
