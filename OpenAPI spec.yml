@@ -1,0 +1,196 @@
+openapi: 3.0.1
+info:
+  title: Web Market
+  version: '0.1'
+externalDocs:
+  url: https://github.com/lucianoScotellaro/SWA-WebMarketRESTfulAPI.git
+  description: GitHub repository of the project
+servers:
+  - url: http://localhost:8080/webmarket/rest
+tags:
+  - name: Request
+    description: Operations on a single request
+  - name: Requests Collection
+    description: Operations on requests collection
+  - name: Request property
+    description: Operations on requests properties
+  - name: Proposal
+    description: Operations on a single proposal
+  - name: Proposal property
+    description: Operations on proposals properties
+paths:
+  /requests:
+    post:
+      operationId: addRequest
+      description: add new request
+      tags:
+        - Request
+      security:
+        - bearerAuth: []
+      requestedBody:
+        content:
+          application/json:
+            schema:
+              $ref:'#/components/schemas/Request'
+      responses:
+        '201':
+          $ref: '#/components/responses/SuccessfulInsert'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: internalToken
+  schemas:
+    ID:
+      type: integer
+      minimum: 1
+    Email:
+      type: string
+      format: email
+    User:
+      type: object
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        username:
+          type: string
+      required:
+        - email
+        - username
+      additionalProperties: false
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+        producer:
+          type: string
+        id:
+          $ref: '#/components/schemas/ID'
+        price:
+          type: number
+          minimum: 0
+        url:
+          type: string
+      required:
+        - name
+        - producer
+        - id
+        - price
+        - url
+      additionalProperties: false
+    Proposal:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
+        notes:
+          type: string
+        response:
+          type: object
+          properties:
+            accepted:
+              type: boolean
+            reason:
+              type: string
+          required:
+            - accepted
+            - reason
+          additionalProperties: false
+      required:
+        - product
+        - notes
+        - response
+      additionalProperties: false
+    Request:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ID'
+        orderer:
+          $ref: '#/components/schemas/User'
+        technician:
+          $ref: '#/components/schemas/User'
+        category:
+          type: string
+        characteristics:
+          type: object
+        notes:
+          type: string
+        proposal:
+          $ref: '#/components/schemas/Proposal'
+        ongoing:
+          type: boolean
+        outcome:
+          type: string
+          enum:
+            - Accepted
+            - Rejected as non compliant
+            - Rejected as defective
+      required:
+        - id
+        - orderer
+        - technician
+        - category
+        - characteristics
+        - notes
+        - proposal
+        - ongoing
+        - outcome
+      additionalProperties: false
+  parameters:
+    RequestID:
+      name: requestid
+      in: path
+      required: true
+      schema: 
+        $ref: '#/components/schemas/ID'
+    ProposalID:
+      name: proposalid
+      in: path
+      required: true
+      schema: 
+        $ref: '#/components/schemas/ID'
+    OrdererID:
+      name: ordererid
+      in: query
+      schema: 
+        $ref: '#/components/schemas/ID'
+    TechnicianEmail:
+      name: techemail
+      in: path
+      required: true
+      schema: 
+        $ref: '#/components/schemas/Email'
+  responses:
+    SuccessfulInsert:
+     description: Element created
+     headers:
+      location:
+        schema:
+         type: string
+         format: uri
+     content:
+      application/json:
+       schema:
+        type: string
+        format: uri
+    NoContent:
+      description: No content
+    GeneralError:
+      description: General error
+    UnauthorizedError:
+      description: Missing or invalid bearer token
+    NotFound:
+     description: Element not found
+     content:
+      text/plain:
+       schema:
+        type: string
+        example: Not found
+  

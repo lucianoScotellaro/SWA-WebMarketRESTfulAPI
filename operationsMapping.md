@@ -19,6 +19,8 @@
 
 ### Chiedere al prof materiale
 
+-------------------------------------------------
+
 ### 3. Inserimento richiesta d'acquisto
 
 `POST [BASE]/requests`
@@ -49,7 +51,7 @@
 
 ### 5. Inserimento proposta d'acquisto
 
-`POST [BASE]/proposals`
+`POST [BASE]/requests/{id}/proposal`
 
 #### Input
 
@@ -57,13 +59,13 @@
 
 #### Output
 
-(201 - CREATED): `[BASE]/proposals/{id}`
+(201 - CREATED): `[BASE]/requests/{id}/proposal`
 
 --------------------------------------------------
 
 ### 6. Aggiornamento proposta d'acquisto
 
-`PATCH [BASE]/proposals/{id}`
+`PATCH [BASE]/requests/{id}/proposal`
 
 #### Input
 
@@ -77,7 +79,7 @@
 
 ### 7. Approvazione proposta d'acquisto
 
-`PATCH [BASE]/proposals/{id}/response`
+`PATCH [BASE]/requests/{id}/proposal/response`
 
 #### Input
 
@@ -141,7 +143,7 @@
 
 ### 11. Estrazione dettagli proposta
 
-`GET [BASE]/proposals/{id}`
+`GET [BASE]/requests/{id}/proposal`
 
 #### Output
 
@@ -166,21 +168,3 @@
     ....    
   ]
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
