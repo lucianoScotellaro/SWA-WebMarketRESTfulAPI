@@ -27,14 +27,202 @@ paths:
         - Request
       security:
         - bearerAuth: []
-      requestedBody:
+      requestBody:
         content:
           application/json:
             schema:
-              $ref:'#/components/schemas/Request'
+              $ref: '#/components/schemas/Request'
       responses:
         '201':
           $ref: '#/components/responses/SuccessfulInsert'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+  /requests/current/{ordererid}:
+    get:
+      operationId: getOrdererCurrentRequests
+      description: Returns open requests for an orderer
+      tags:
+        - Requests Collection
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OrdererID'
+      responses:
+        '200':
+          description: Orderer open requests base info list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrdererBaseRequestsList'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+  /requests/unassigned:
+    get:
+      operationId: getUnassigned
+      description: Returns requests that have not been assigned to a technician
+      tags:
+        - Requests Collection
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Unassigned requests base info list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnassignedRequestsList'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+  /requests/{techemail}:
+    get:
+      operationId: getTechnicianRequests
+      description: Returns requests handled by the technician
+      tags:
+        - Requests Collection
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TechnicianEmail'
+      responses:
+        '200':
+          description: Technician requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TechnicianBaseRequestsList'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+  /requests/{requestid}:
+    delete:
+      operationId: deleteRequest
+      description: Delete a request
+      tags:
+        - Request
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RequestID'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+  /requests/{requestid}/technicianEmail:
+    patch:
+      operationId: addTechnician
+      description: Binds a technician to a request
+      tags:
+        - Request
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RequestID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Email'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+  /requests/{requestid}/proposal:
+    get:
+      operationId: getProposal
+      description: Returns proposal associated to the request
+      tags:
+        - Request
+        - Proposal
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RequestID'
+      responses:
+        '200':
+          description: Proposal associated to the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposal'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+    post:
+      operationId: addProposal
+      description: Add a proposal for a request
+      tags:
+        - Request property
+        - Proposal
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RequestID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Proposal'
+      responses:
+        '201':
+          $ref: '#/components/responses/SuccessfulInsert'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+    patch:
+      operationId:  updateProposal
+      description: Update proposal for a request
+      tags:
+        - Request property
+        - Proposal
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RequestID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Proposal'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/GeneralError'
+  /requests/{requestid}/proposal/response:
+    patch:
+      operationId: addResponse
+      description: Add response for a proposal
+      tags:
+        - Proposal property
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RequestID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Response'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '500':
@@ -92,16 +280,7 @@ components:
         notes:
           type: string
         response:
-          type: object
-          properties:
-            accepted:
-              type: boolean
-            reason:
-              type: string
-          required:
-            - accepted
-            - reason
-          additionalProperties: false
+          $ref: '#/components/schemas/Response'
       required:
         - product
         - notes
@@ -143,6 +322,68 @@ components:
         - ongoing
         - outcome
       additionalProperties: false
+    OrdererBaseRequestsList:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            $ref: '#/components/schemas/ID'
+          technician:
+            $ref: '#/components/schemas/User'
+          category:
+            type: string
+        required:
+          - id
+          - technician
+          - category
+    UnassignedRequestsList:
+      type: array
+      items:
+        type: object
+        properties:
+          id: 
+            $ref: '#/components/schemas/ID'
+          orderer:
+            $ref: '#/components/schemas/User'
+          category:
+            type: string
+          characteristics:
+            type: object
+          notes: 
+            type: string
+        required:
+          - id
+          - orderer
+          - category
+          - characteristics
+          - notes
+    TechnicianBaseRequestsList:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            $ref: '#/components/schemas/ID'
+          orderer:
+            $ref: '#/components/schemas/User'
+          category:
+            type: string
+        required:
+          - id
+          - orderer
+          - category
+    Response:
+      type: object
+      properties:
+        accepted:
+          type: boolean
+        reason:
+          type: string
+      required:
+        - accepted
+        - reason
+      additionalProperties: false
   parameters:
     RequestID:
       name: requestid
@@ -158,7 +399,8 @@ components:
         $ref: '#/components/schemas/ID'
     OrdererID:
       name: ordererid
-      in: query
+      in: path
+      required: true
       schema: 
         $ref: '#/components/schemas/ID'
     TechnicianEmail:

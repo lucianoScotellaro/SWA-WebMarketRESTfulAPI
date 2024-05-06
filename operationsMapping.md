@@ -103,7 +103,7 @@
 
 ### 9. Estrazione lista richieste in corso di un certo ordinante
 
-`GET [BASE]/requests/current?ordererID=123123`
+`GET [BASE]/requests/current/{ordererID}`
 
 #### Output
 
