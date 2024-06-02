@@ -1,0 +1,34 @@
+{
+  "id": 1,
+  "orderer": {
+    "username": "pippo",
+    "email": "pippo@gmail.com"
+  },
+  "technician": {
+    "username": "pluto",
+    "email": "pluto@gmail.com"
+  },
+  "category": "informatic",
+  "characteristics": {
+    "GPU": "RTX4090Ti",
+    "CPU": "Ryzen5600X",
+    "RAM": "32GB"
+  },
+  "notes": "Vorrei un bel computer",
+  "proposal": {
+    "product": {
+      "name": "HP qualcosa",
+      "producer": "HP",
+      "id": 1,
+      "price": 799.99,
+      "url": "www.youtube.com"
+    },
+    "notes": "Questo e` proprio un bel computer",
+    "answer": {
+      "accepted": true,
+      "reason": ""
+    }
+  },
+  "ongoing": false,
+  "outcome": "accepted"
+}

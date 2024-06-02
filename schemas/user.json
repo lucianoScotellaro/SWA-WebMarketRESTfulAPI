@@ -1,19 +1,20 @@
 {
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "https://swa.net/schemas/user",
-    "type": "object",
-      "properties": {
-        "email": {
-          "type": "string",
-          "format": "email"
-        },
-        "username": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "email",
-        "username"
-      ],
-      "additionalProperties": false
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://swa.net/schemas/user",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "username": {
+      "type": "string"
+    }
+  },
+  "required": ["email", "username"],
+  "additionalProperties": false
 }

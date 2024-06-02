@@ -1,6 +1,7 @@
 # URL Mapping
 
 ## URL di base
+
 `https://swa.net/webmarket/rest`
 
 ## Operazioni
@@ -11,7 +12,7 @@
 
 ### Chiedere al prof materiale
 
--------------------------------------------------
+---
 
 ### 2. Logout
 
@@ -19,7 +20,7 @@
 
 ### Chiedere al prof materiale
 
--------------------------------------------------
+---
 
 ### 3. Inserimento richiesta d'acquisto
 
@@ -33,39 +34,25 @@
 
 (201 - CREATED): `[BASE]/requests/{id}`
 
--------------------------------------------------
+---
 
-### 4. Associazione richiesta &rarr tecnico
+### 4. Associazione richiesta ad un tecnico
 
-`PATCH [BASE]/requests/{id}/technicianEmail`
+`PUT [BASE]/requests/{id}/technician`
 
 #### Input
 
-`{technicianEmail}`
+`{technician}`
 
 #### Output
 
 (204 - NO CONTENT)
 
---------------------------------------------------
+---
 
-### 5. Inserimento proposta d'acquisto
+### 5. Inserimento e aggiornamento proposta d'acquisto
 
-`POST [BASE]/requests/{id}/proposal`
-
-#### Input
-
-`{proposal}`
-
-#### Output
-
-(201 - CREATED): `[BASE]/requests/{id}/proposal`
-
---------------------------------------------------
-
-### 6. Aggiornamento proposta d'acquisto
-
-`PATCH [BASE]/requests/{id}/proposal`
+`PUT [BASE]/requests/{id}/proposal`
 
 #### Input
 
@@ -75,23 +62,23 @@
 
 (204 - NO CONTENT)
 
---------------------------------------------------
+---
 
-### 7. Approvazione proposta d'acquisto
+### 6. Approvazione proposta d'acquisto
 
-`PATCH [BASE]/requests/{id}/proposal/response`
+`PUT [BASE]/requests/{id}/proposal/answer`
 
 #### Input
 
-`{response}`
+`{answer}`
 
 #### Output
 
 (204 - NO CONTENT)
 
---------------------------------------------------
+---
 
-### 8. Eliminazione richiesta d'acquisto
+### 7. Eliminazione richiesta d'acquisto
 
 `DELETE [BASE]/requests/{id}`
 
@@ -99,29 +86,34 @@
 
 (204 - NO CONTENT)
 
---------------------------------------------------
+---
 
-### 9. Estrazione lista richieste in corso di un certo ordinante
+### 8. Estrazione della lista delle richieste in corso di un certo ordinante
 
-`GET [BASE]/requests/current/{ordererID}`
+`GET [BASE]/requests/ongoing?ordererid=12312`
 
 #### Output
 
 (200):
 
 ```json
-  [
-	{ 
-		"id" : "123123", 
-		"url" : "[BASE]/requests/{id}"
+[
+  {
+    "id": "123123",
+	"technician":{
+		"id": "123123",
+		"username": "aname",
+    	"email": "anemail@gmail.com"
 	},
-    ....    
-  ]
+	"url": "[BASE]/requests/{id}"
+  },
+  ...
+]
 ```
 
---------------------------------------------------
+---
 
-### 10. Estrazione lista richieste non assegnate
+### 9. Estrazione lista richieste non assegnate
 
 `GET [BASE]/requests/unassigned`
 
@@ -131,17 +123,22 @@
 
 ```json
   [
-	{ 
-		"id" : "123123", 
+	{
+		"id" : "123123",
+		"orderer": {
+			"id": "123123",
+			"username": "aname",
+    		"email": "anemail@gmail.com"
+		},
 		"url" : "[BASE]/requests/{id}"
 	},
-    ....    
+    ....
   ]
 ```
 
---------------------------------------------------
+---
 
-### 11. Estrazione dettagli proposta
+### 10. Estrazione dettagli proposta
 
 `GET [BASE]/requests/{id}/proposal`
 
@@ -149,11 +146,11 @@
 
 (200): `{proposal}`
 
---------------------------------------------------
+---
 
-### 12. Estrazione richieste gestite da un certo tecnico
+### 11. Estrazione richieste gestite da un certo tecnico
 
-`GET [BASE]/requests/{email}`
+`GET [BASE]/requests?techid=123123`
 
 #### Output
 
@@ -161,10 +158,16 @@
 
 ```json
   [
-	{ 
-		"id" : "123123", 
+	{
+		"id" : "123123",
+		"orderer": {
+			"id": "123123",
+			"username": "aname",
+    		"email": "anemail@gmail.com"
+		},
+		"ongoing": true,
 		"url" : "[BASE]/requests/{id}"
 	},
-    ....    
+    ....
   ]
 ```

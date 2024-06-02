@@ -1,35 +1,18 @@
-{   
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "https://swa.net/schemas/proposal",
-    "type": "object",
-    "properties": {
-      "product": {
-        "$ref": "/schemas/product"
-      },
-      "notes": {
-        "type": "string"
-      },
-      "response": {
-        "type": "object",
-        "properties": {
-          "accepted": {
-            "type": "boolean"
-          },
-          "reason": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "accepted",
-          "reason"
-        ],
-        "additionalProperties": false
-      }
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://swa.net/schemas/proposal",
+  "type": "object",
+  "properties": {
+    "product": {
+      "$ref": "/schemas/product"
     },
-    "required": [
-      "product",
-      "notes",
-      "response"
-    ],
-    "additionalProperties": false
-  }
+    "notes": {
+      "type": "string"
+    },
+    "answer": {
+      "$ref": "/schemas/answer"
+    }
+  },
+  "required": ["product", "notes", "answer"],
+  "additionalProperties": false
+}
