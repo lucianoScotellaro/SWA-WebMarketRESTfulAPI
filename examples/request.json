@@ -1,10 +1,12 @@
 {
   "id": 1,
   "orderer": {
+    "id": 12,
     "username": "pippo",
     "email": "pippo@gmail.com"
   },
   "technician": {
+    "id": 13,
     "username": "pluto",
     "email": "pluto@gmail.com"
   },

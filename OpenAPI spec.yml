@@ -34,6 +34,8 @@ paths:
                 $ref: "#/components/schemas/TechnicianBaseRequestsList"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/GeneralError"
     post:
@@ -96,6 +98,28 @@ paths:
         "500":
           $ref: "#/components/responses/GeneralError"
   /requests/{requestid}:
+    get:
+      operationId: getRequest
+      description: Returns a request
+      tags:
+        - Request
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/RequestID"
+      responses:
+        "200":
+          description: Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Request"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/GeneralError"
     delete:
       operationId: deleteRequest
       description: Delete a request
@@ -110,6 +134,8 @@ paths:
           $ref: "#/components/responses/NoContent"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/GeneralError"
   /requests/{requestid}/technician:
@@ -132,6 +158,8 @@ paths:
           $ref: "#/components/responses/NoContent"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/GeneralError"
   /requests/{requestid}/proposal:
@@ -153,6 +181,8 @@ paths:
                 $ref: "#/components/schemas/Proposal"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/GeneralError"
     put:
@@ -174,6 +204,8 @@ paths:
           $ref: "#/components/responses/SuccessfulInsert"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/GeneralError"
   /requests/{requestid}/proposal/answer:
@@ -196,6 +228,8 @@ paths:
           $ref: "#/components/responses/NoContent"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/GeneralError"
 components:
