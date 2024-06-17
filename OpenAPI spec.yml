@@ -23,9 +23,11 @@ paths:
       description: Login
       tags:
         - Auth
-      parameters:
-        - $ref: "#/components/parameters/Username"
-        - $ref: "#/components/parameters/Password"
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
       responses:
         "204":
           $ref: "#/components/responses/NoContent"
@@ -445,18 +447,6 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/ID"
-    Username:
-      name: username
-      in: query
-      required: true
-      schema:
-        type: string
-    Password:
-      name: password
-      in: query
-      required: true
-      schema:
-        type: string
   responses:
     SuccessfulInsert:
       description: Element created
