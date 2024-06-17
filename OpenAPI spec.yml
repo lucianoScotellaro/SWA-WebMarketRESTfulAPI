@@ -14,7 +14,38 @@ tags:
     description: Operations on requests collection
   - name: Request property
     description: Operations on a single request properties
+  - name: Auth
+    description: Authentication operations
 paths:
+  /auth/login:
+    post:
+      operationId: login
+      description: Login
+      tags:
+        - Auth
+      parameters:
+        - $ref: "#/components/parameters/Username"
+        - $ref: "#/components/parameters/Password"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "500":
+          $ref: "#/components/responses/GeneralError"
+  /auth/logout:
+    delete:
+      operationId: logout
+      description: Logout
+      tags:
+        - Auth
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/GeneralError"
   /requests:
     get:
       operationId: getTechnicianRequests
@@ -414,6 +445,18 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/ID"
+    Username:
+      name: username
+      in: query
+      required: true
+      schema:
+        type: string
+    Password:
+      name: password
+      in: query
+      required: true
+      schema:
+        type: string
   responses:
     SuccessfulInsert:
       description: Element created

@@ -21,7 +21,7 @@ public class AuthLoggedFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext request) throws IOException
     {
         String authHeader = request.getHeaderString(AUTHORIZATION);
-        if(authHeader.startsWith("Bearer "))
+        if(authHeader != null && authHeader.startsWith("Bearer "))
         {
             String token = authHeader.substring("Bearer".length()).trim();
             if (!token.isEmpty())
@@ -48,6 +48,10 @@ public class AuthLoggedFilter implements ContainerRequestFilter {
             {
                 request.abortWith(Response.status(UNAUTHORIZED).build());
             }
+        }
+        else
+        {
+            request.abortWith(Response.status(UNAUTHORIZED).build());
         }
     }
 }

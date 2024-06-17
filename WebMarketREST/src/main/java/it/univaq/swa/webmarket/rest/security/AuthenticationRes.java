@@ -17,7 +17,7 @@ public class AuthenticationRes {
 
         if(AuthHelpers.getInstance().authenticateUser(username, password)){
             String token = AuthHelpers.getInstance().issueToken(username, uriInfo);
-            return Response.ok().header(AUTHORIZATION, "Bearer "+ token).build();
+            return Response.noContent().header(AUTHORIZATION, "Bearer "+ token).build();
         }
         return Response.status(UNAUTHORIZED).build();
     }
@@ -39,6 +39,6 @@ public class AuthenticationRes {
         String username = (String) request.getProperty("username");
         String refreshedToken = AuthHelpers.getInstance().issueToken(username, uriInfo);
 
-        return Response.ok().header(AUTHORIZATION, "Bearer "+refreshedToken).build();
+        return Response.ok().header(AUTHORIZATION, "Bearer "+ refreshedToken).build();
     }
 }

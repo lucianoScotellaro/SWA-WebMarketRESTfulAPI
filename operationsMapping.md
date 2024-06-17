@@ -8,17 +8,25 @@
 
 ### 1. Login
 
-`POST [BASE]/users/login`
+`POST [BASE]/auth/login`
 
-### Chiedere al prof materiale
+#### Input
+
+Form URL encoded username and password
+
+#### Output
+
+(204 - NO CONTENT)
 
 ---
 
 ### 2. Logout
 
-`POST [BASE]/users/logout`
+`DELETE [BASE]/auth/logout`
 
-### Chiedere al prof materiale
+#### Output
+
+(204 - NO CONTENT)
 
 ---
 

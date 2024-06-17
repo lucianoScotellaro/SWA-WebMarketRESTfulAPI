@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html  lang="en">
     <head>
-        <title>JAX-RS EventsREST application (JakartaEE 10)</title>
+        <title>JAX-RS WebMarketREST application (JakartaEE 10)</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="res/index.css">
     </head>
     <body>
-        <p>Hello</p>
+        <div class="buttons-container">
+            <button id="start-tests-btn" type="button">Start Tests</button>
+            <button id="stop-tests-btn" type="button">Stop Tests</button>
+        </div>
+        <div class="web-console" id="web-console"></div>
+
+        <script type="module" src="res/js/index.js"></script>
+        <script type="module" src="res/js/fetchClient.js"></script>
+        <script type="module" src="res/js/tests.js"></script>
+        <script type="module" src="res/js/webConsole.js"></script>
     </body>
 </html>

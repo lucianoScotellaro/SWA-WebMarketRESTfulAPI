@@ -1,0 +1,81 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html::-webkit-scrollbar{
+    display: none;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    font-size: 16px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons-container{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 15px 8px;
+}
+
+button{
+    margin: 8px;
+    padding: 5px;
+    border-radius: 6px;
+    background-color: lightblue;
+}
+
+.web-console{
+    width: 90%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: clip;
+    overflow-clip-margin: border-box;
+}
+
+.web-console::-webkit-scrollbar{
+    display: none;
+}
+
+.line{
+    width: 100%;
+    height: auto;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: lightgray;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.title{
+    background-color: dodgerblue;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.test-header{
+    background-color: orange;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.message-portion{
+    background-color: mediumpurple;
+}
+
+.success{
+    background-color: green;
+}
+
+.error{
+    background-color: red;
+}

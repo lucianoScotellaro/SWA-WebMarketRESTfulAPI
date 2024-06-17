@@ -28,7 +28,8 @@ public class JWTHelpers {
         }
     }
 
-    public SecretKey getKey() {
+    public SecretKey getKey()
+    {
         return key;
     }
 
@@ -52,9 +53,7 @@ public class JWTHelpers {
 
     public void revokeToken(String token)
     {
-        Jwts.builder()
-                .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(-10L).toInstant()))
-                .compact();
+
     }
 
     public static JWTHelpers getInstance()

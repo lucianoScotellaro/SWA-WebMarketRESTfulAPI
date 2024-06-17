@@ -6,6 +6,7 @@ import it.univaq.swa.webmarket.rest.models.PurchaseRequest;
 import it.univaq.swa.webmarket.rest.models.User;
 import it.univaq.swa.webmarket.rest.utils.DummyGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PurchaseRequestsServiceImpl implements PurchaseRequestsService{
@@ -41,13 +42,21 @@ public class PurchaseRequestsServiceImpl implements PurchaseRequestsService{
     }
 
     @Override
-    public List<PurchaseRequest> getOrdererOngoingRequests(int ordererId) {
-        return null;
+    public List<PurchaseRequest> getOrdererOngoingRequests(int ordererId)
+    {
+        ArrayList<PurchaseRequest> requests =  new ArrayList<>();
+        requests.add(DummyGenerator.createDummyRequest());
+        requests.add(DummyGenerator.createDummyRequest());
+        return requests;
     }
 
     @Override
-    public List<PurchaseRequest> getUnassignedRequests() {
-        return null;
+    public List<PurchaseRequest> getUnassignedRequests()
+    {
+        ArrayList<PurchaseRequest> requests =  new ArrayList<>();
+        requests.add(DummyGenerator.createDummyRequest());
+        requests.add(DummyGenerator.createDummyRequest());
+        return requests;
     }
 
     @Override
@@ -56,8 +65,11 @@ public class PurchaseRequestsServiceImpl implements PurchaseRequestsService{
     }
 
     @Override
-    public List<PurchaseRequest> getTechnicianRequests(int technicianId) {
-        return null;
+    public List<PurchaseRequest> getTechnicianRequests(int technicianId)
+    {
+        ArrayList<PurchaseRequest> requests =  new ArrayList<>();
+        requests.add(DummyGenerator.createDummyRequest());
+        requests.add(DummyGenerator.createDummyRequest());
+        return requests;
     }
-
 }
