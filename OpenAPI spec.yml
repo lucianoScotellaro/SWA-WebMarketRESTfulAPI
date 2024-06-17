@@ -65,6 +65,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TechnicianBaseRequestsList"
+              examples:
+                example:
+                  $ref: "#/components/examples/TechnicianRequestsList"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
         "404":
@@ -83,6 +86,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Request"
+            examples:
+              example:
+                $ref: "#/components/examples/Request"
       responses:
         "201":
           $ref: "#/components/responses/SuccessfulInsert"
@@ -107,6 +113,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/OrdererBaseRequestsList"
+              examples:
+                example:
+                  $ref: "#/components/examples/OrdererRequestsList"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
         "500":
@@ -126,6 +135,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UnassignedRequestsList"
+              examples:
+                example:
+                  $ref: "#/components/examples/UnassignedRequestsList"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
         "500":
@@ -147,6 +159,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Request"
+              examples:
+                example:
+                  $ref: "#/components/examples/Request"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
         "404":
@@ -186,6 +201,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/User"
+            examples:
+              example:
+                $ref: "#/components/examples/User"   
       responses:
         "204":
           $ref: "#/components/responses/NoContent"
@@ -212,6 +230,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Proposal"
+              examples:
+                example:
+                  $ref: "#/components/examples/Proposal"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
         "404":
@@ -232,6 +253,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Proposal"
+            examples:
+                example:
+                  $ref: "#/components/examples/Proposal"
       responses:
         "201":
           $ref: "#/components/responses/SuccessfulInsert"
@@ -256,6 +280,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Answer"
+            examples:
+                example:
+                  $ref: "#/components/examples/Answer"
       responses:
         "204":
           $ref: "#/components/responses/NoContent"
@@ -473,3 +500,114 @@ components:
           schema:
             type: string
             example: Not found
+  examples:
+    User:
+      summary: An example user
+      value:
+        id: 12
+        username: pippo
+        email: pippo@gmail.com
+    Product:
+      summary: An example product
+      value:
+        name: HP qualcosa
+        producer: HP
+        id: 1
+        price: 799.99
+        url: www.youtube.com
+    Answer:
+      summary: An example answer
+      value:
+        accepted: true
+        reason: I like it
+    Proposal:
+      summary: An example proposal
+      value:
+        product:
+          name: HP qualcosa
+          producer: HP
+          id: 1
+          price: 799.99
+          url: www.youtube.com
+        notes: Questo e` proprio un bel computer
+        answer:
+          accepted: true
+          reason: I like it
+    Request:
+      summary: An example request
+      value:
+        id: 1
+        orderer:
+          id: 12
+          username: pippo
+          email: pippo@gmail.com
+        technician:
+          id: 12
+          username: pippo
+          email: pippo@gmail.com
+        category: informatic
+        characteristics:
+          GPU: RTX4090Ti
+          CPU: Ryzen5600X
+          RAM: 32GB
+        notes: Vorrei un bel computer
+        proposal:
+          product:
+            name: HP qualcosa
+            producer: HP
+            id: 1
+            price: 799.99
+            url: www.youtube.com
+          notes: Questo e` proprio un bel computer
+          answer:
+            accepted: true
+            reason: I like it
+        ongoing: false
+        outcome: accepted
+    TechnicianRequestsList:
+      summary: An example technician requests list
+      value:
+        - id: 123123
+          orderer:
+            id: 12
+            username: pippo
+            email: pippo@gmail.com
+          ongoing: true
+          url: "[BASE]/requests/{id}"
+        - id: 123123
+          orderer:
+            id: 12
+            username: pippo
+            email: pippo@gmail.com
+          ongoing: true
+          url: "[BASE]/requests/{id}"
+    OrdererRequestsList:
+      summary: An example orderer requests list
+      value:
+        - id: 123123
+          technician:
+            id: 12
+            username: pippo
+            email: pippo@gmail.com
+          url: "[BASE]/requests/{id}"
+        - id: 123123
+          technician:
+            id: 12
+            username: pippo
+            email: pippo@gmail.com
+          url: "[BASE]/requests/{id}"
+    UnassignedRequestsList:
+      summary: An example unassigned requests list
+      value:
+        - id: 123123
+          orderer:
+            id: 12
+            username: pippo
+            email: pippo@gmail.com
+          url: "[BASE]/requests/{id}"
+        - id: 123123
+          orderer:
+            id: 12
+            username: pippo
+            email: pippo@gmail.com
+          url: "[BASE]/requests/{id}"
