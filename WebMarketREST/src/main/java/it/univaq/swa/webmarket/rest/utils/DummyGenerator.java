@@ -21,16 +21,13 @@ public class DummyGenerator {
         request.setOngoing(true);
         request.setOutcome("");
 
-        System.out.println(request.getID());
-        System.out.println(request.getOrderer().getId());
-
         return request;
     }
 
     public static User createDummyUser(){
         User user = new User();
         user.setId(faker.random().nextInt(1,100));
-        user.setUsername(faker.pokemon().name());
+        user.setUsername("pippo");
         user.setEmail(faker.internet().emailAddress());
 
         return user;

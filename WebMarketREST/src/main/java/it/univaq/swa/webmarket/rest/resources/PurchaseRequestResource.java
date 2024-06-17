@@ -8,7 +8,11 @@ import it.univaq.swa.webmarket.rest.models.PurchaseRequest;
 import it.univaq.swa.webmarket.rest.models.User;
 import it.univaq.swa.webmarket.rest.security.Logged;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
+
+import static jakarta.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 public class PurchaseRequestResource {
 
@@ -60,19 +64,33 @@ public class PurchaseRequestResource {
     @Logged
     @Path("/proposal")
     @Consumes({"application/json"})
-    public Response setProposal(Proposal proposal)
+    public Response setProposal(Proposal proposal, @Context ContainerRequestContext requestContext)
     {
-        business.setProposal(request.getID(), proposal);
-        return Response.noContent().build();
+        if(requestContext.getProperty("username").equals(request.getTechnician().getUsername()))
+        {
+            business.setProposal(request.getID(), proposal);
+            return Response.noContent().build();
+        }
+        else
+        {
+            return Response.status(UNAUTHORIZED).build();
+        }
     }
 
     @PUT
     @Logged
     @Path("/proposal/answer")
     @Consumes({"application/json"})
-    public Response setAnswer(Answer answer)
+    public Response setAnswer(Answer answer, @Context ContainerRequestContext requestContext)
     {
-        business.setAnswer(request.getID(), answer);
-        return Response.noContent().build();
+        if(requestContext.getProperty("username").equals(request.getOrderer().getUsername()))
+        {
+            business.setAnswer(request.getID(), answer);
+            return Response.noContent().build();
+        }
+        else
+        {
+            return Response.status(UNAUTHORIZED).build();
+        }
     }
 }
