@@ -56,6 +56,7 @@ public class PurchaseRequestsResource {
     public Response getOrdererOngoingRequests(@QueryParam("ordererid") int ordererId, @Context UriInfo uriInfo)
     {
         try {
+
             return Response.ok(mapRequests(business.getOrdererOngoingRequests(ordererId), "orderer", uriInfo)).build();
         }
         catch (NotFoundException e)

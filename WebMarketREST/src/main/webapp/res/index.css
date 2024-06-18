@@ -23,7 +23,13 @@ body{
     width: 90%;
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     padding: 15px 8px;
+}
+
+input{
+    height: 2rem;
+    margin: 0 5px;
 }
 
 button{

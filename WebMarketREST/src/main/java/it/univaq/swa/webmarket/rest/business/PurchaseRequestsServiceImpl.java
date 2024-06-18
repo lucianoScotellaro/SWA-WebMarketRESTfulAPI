@@ -18,18 +18,16 @@ public class PurchaseRequestsServiceImpl implements PurchaseRequestsService{
 
     @Override
     public int addRequest(PurchaseRequest request) {
-        return 0;
+        return 1;
     }
 
     @Override
-    public void setTechnician(int purchaseRequestId, User technician) {
+    public void setTechnician(int purchaseRequestId, User technician){
 
     }
 
     @Override
-    public int setProposal(int purchaseRequestId, Proposal proposal) {
-        return 0;
-    }
+    public void setProposal(int purchaseRequestId, Proposal proposal){}
 
     @Override
     public void setAnswer(int purchaseRequestId, Answer answer) {

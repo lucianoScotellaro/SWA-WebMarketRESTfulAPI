@@ -14,7 +14,7 @@ public  interface PurchaseRequestsService
     int addRequest(PurchaseRequest request);
     void deleteRequest(int purchaseRequestId);
     Proposal getProposal(int purchaseRequestId);
-    int setProposal(int purchaseRequestId, Proposal proposal);
+    void setProposal(int purchaseRequestId, Proposal proposal);
     void setAnswer(int purchaseRequestId, Answer answer);
     void setTechnician(int purchaseRequestId, User technician);
     List<PurchaseRequest> getUnassignedRequests();

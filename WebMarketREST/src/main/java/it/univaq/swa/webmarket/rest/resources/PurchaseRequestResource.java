@@ -28,9 +28,13 @@ public class PurchaseRequestResource {
     @GET
     @Logged
     @Produces({"application/json"})
-    public Response getRequest()
+    public Response getRequest(@Context ContainerRequestContext requestContext)
     {
-        return Response.ok().entity(request).build();
+        if(requestContext.getProperty("username").equals(request.getOrderer().getUsername())){
+            return Response.ok().entity(request).build();
+        }
+
+        return Response.status(UNAUTHORIZED).build();
     }
 
 
@@ -71,10 +75,8 @@ public class PurchaseRequestResource {
             business.setProposal(request.getID(), proposal);
             return Response.noContent().build();
         }
-        else
-        {
-            return Response.status(UNAUTHORIZED).build();
-        }
+
+        return Response.status(UNAUTHORIZED).build();
     }
 
     @PUT
@@ -88,9 +90,7 @@ public class PurchaseRequestResource {
             business.setAnswer(request.getID(), answer);
             return Response.noContent().build();
         }
-        else
-        {
-            return Response.status(UNAUTHORIZED).build();
-        }
+
+        return Response.status(UNAUTHORIZED).build();
     }
 }
